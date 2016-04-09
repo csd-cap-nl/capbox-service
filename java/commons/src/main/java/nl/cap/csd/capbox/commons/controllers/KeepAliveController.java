@@ -1,4 +1,4 @@
-package nl.cap.csd.capbox.commons.nl.cap.csd.capbox.controllers;
+package nl.cap.csd.capbox.commons.controllers;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;

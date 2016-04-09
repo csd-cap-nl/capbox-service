@@ -1,6 +1,6 @@
 package nl.cap.csd.capbox.commons.config;
 
-import nl.cap.csd.capbox.commons.nl.cap.csd.capbox.controllers.KeepAliveController;
+import nl.cap.csd.capbox.commons.controllers.KeepAliveController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
