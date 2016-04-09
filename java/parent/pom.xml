@@ -7,6 +7,7 @@
     <groupId>nl.cap.csd.capbox</groupId>
     <artifactId>parent</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
     <properties>
         <spring-context.version>4.2.2.RELEASE</spring-context.version>
@@ -14,6 +15,10 @@
         <mockito-core.version>1.10.19</mockito-core.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <modules>
+        <module>../commons</module>
+    </modules>
 
     <build>
         <plugins>
