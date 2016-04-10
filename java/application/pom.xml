@@ -12,6 +12,7 @@
     </parent>
 
     <artifactId>application</artifactId>
+    <name>Capbox</name>
 
     <dependencies>
         <dependency>
@@ -34,24 +35,15 @@
     <build>
         <resources>
             <resource>
-                <directory>src/main/resource/filtered</directory>
+                <directory>${basedir}/src/main/resources/filtered</directory>
                 <filtering>true</filtering>
             </resource>
             <resource>
-                <directory>src/main/resource/unfiltered</directory>
+                <directory>${basedir}/src/main/resources/unfiltered</directory>
                 <filtering>false</filtering>
             </resource>
         </resources>
-        <testResources>
-            <testResource>
-                <directory>src/test/resource/filtered</directory>
-                <filtering>true</filtering>
-            </testResource>
-            <testResource>
-                <directory>src/test/resource/unfiltered</directory>
-                <filtering>false</filtering>
-            </testResource>
-        </testResources>
+
     </build>
 
 </project>
