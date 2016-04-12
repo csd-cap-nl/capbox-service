@@ -17,6 +17,8 @@
         <mockito.version>1.10.19</mockito.version>
         <spring-boot.version>1.3.3.RELEASE</spring-boot.version>
         <jackson.version>2.6.3</jackson.version>
+        <capbox-commons.version>1.0-SNAPSHOT</capbox-commons.version>
+        <httpcomponents.version>4.5.2</httpcomponents.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
