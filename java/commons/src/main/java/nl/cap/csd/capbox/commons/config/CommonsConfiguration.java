@@ -3,9 +3,13 @@ package nl.cap.csd.capbox.commons.config;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import nl.cap.csd.capbox.commons.controllers.KeepAliveController;
+import nl.cap.csd.capbox.commons.services.version.VersionService;
+import nl.cap.csd.capbox.commons.services.version.impl.VersionServiceImpl;
 import nl.cap.csd.capbox.commons.transformers.Java8TimeModule;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
@@ -13,11 +17,22 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 import java.util.List;
 
 @Configuration
+@PropertySource("classpath:/application.properties")
 public class CommonsConfiguration extends WebMvcConfigurationSupport {
 
     @Bean
-    public KeepAliveController keepAliveController() {
-        return new KeepAliveController();
+    public static PropertySourcesPlaceholderConfigurer propertyConfigIn() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
+
+    @Bean
+    public VersionService versionService() {
+        return new VersionServiceImpl();
+    }
+
+    @Bean
+    public KeepAliveController keepAliveController(final VersionService versionService) {
+        return new KeepAliveController(versionService);
     }
 
     @Bean

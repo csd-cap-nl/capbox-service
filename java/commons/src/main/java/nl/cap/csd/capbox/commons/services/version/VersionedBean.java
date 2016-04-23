@@ -1,4 +1,4 @@
-package nl.cap.csd.capbox.commons.controllers;
+package nl.cap.csd.capbox.commons.services.version;
 
 /**
  * This interface adds version information to toplevel beans.

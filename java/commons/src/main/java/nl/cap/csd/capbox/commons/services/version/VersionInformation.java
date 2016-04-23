@@ -1,4 +1,4 @@
-package nl.cap.csd.capbox.commons.controllers;
+package nl.cap.csd.capbox.commons.services.version;
 
 public class VersionInformation {
 
@@ -19,4 +19,11 @@ public class VersionInformation {
         return version;
     }
 
+    @Override
+    public String toString() {
+        return "VersionInformation{" +
+                "name='" + name + '\'' +
+                ", version='" + version + '\'' +
+                '}';
+    }
 }

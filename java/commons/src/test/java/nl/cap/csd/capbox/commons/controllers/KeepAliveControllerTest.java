@@ -1,19 +1,23 @@
 package nl.cap.csd.capbox.commons.controllers;
 
+import nl.cap.csd.capbox.commons.services.version.VersionService;
+import nl.cap.csd.capbox.commons.services.version.VersionInformation;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.context.ApplicationContext;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
+import java.util.regex.Pattern;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -22,76 +26,46 @@ import static org.mockito.Mockito.when;
 public class KeepAliveControllerTest {
 
     @Mock
-    private ApplicationContext contextMock;
+    private VersionService versionServiceMock;
 
     @InjectMocks
     private KeepAliveController fixture;
 
     private final VersionInformation version1Stub = new VersionInformation("version1Stub", "1.0");
     private final VersionInformation version2Stub = new VersionInformation("test2", "2.4");
-    private final Map<String, VersionedBean> controllersStubs = new HashMap<>();
 
     @Before
     public void setUp() {
-        fixture.setApplicationContext(contextMock);
-        when(contextMock.getBeansOfType(VersionedBean.class)).thenReturn(controllersStubs);
+        when(versionServiceMock.getAllVersions()).thenReturn(Arrays.asList(version1Stub, version2Stub));
     }
 
     @Test
-    public void get_multiple_versions() {
-        controllersStubs.put("test1", new Test1VersionedBean());
-        controllersStubs.put("test2", new Test2VersionedBean());
-
+    public void get_versions() {
         final List<VersionInformation> result = fixture.getVersions();
 
         assertEquals(2, result.size());
         assertTrue(result.contains(version1Stub));
         assertTrue(result.contains(version2Stub));
         assertFalse(result.contains(null));
-        verify(contextMock).getBeansOfType(VersionedBean.class);
+        verify(versionServiceMock).getAllVersions();
     }
 
     @Test
-    public void get_empty_versions_list() {
+    public void get_keepalive() {
+        final String result = fixture.keepalive();
 
-        final List<VersionInformation> result = fixture.getVersions();
-
-        assertEquals(0, result.size());
-        verify(contextMock).getBeansOfType(VersionedBean.class);
+        Pattern pattern = Pattern.compile("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}.\\d+");
+        assertTrue(pattern.matcher(result)
+                .matches());
     }
 
     @Test
-    public void get_null_version_information() {
-        controllersStubs.put("test1", new Test1VersionedBean());
-        controllersStubs.put("test2", new TestNullVersionedBean());
+    public void get_own_version() {
+        final VersionInformation result = fixture.version();
 
-        final List<VersionInformation> result = fixture.getVersions();
-
-        assertEquals(2, result.size());
-        assertTrue(result.contains(version1Stub));
-        assertTrue(result.contains(null));
-        assertFalse(result.contains(version2Stub));
-        verify(contextMock).getBeansOfType(VersionedBean.class);
+        assertNotNull(result);
+        assertNull(result.getName());
+        assertNull(result.getVersion());
     }
 
-    private class Test1VersionedBean implements VersionedBean {
-        @Override
-        public VersionInformation version() {
-            return version1Stub;
-        }
-    }
-
-    private class Test2VersionedBean implements VersionedBean {
-        @Override
-        public VersionInformation version() {
-            return version2Stub;
-        }
-    }
-
-    private class TestNullVersionedBean implements VersionedBean {
-        @Override
-        public VersionInformation version() {
-            return null;
-        }
-    }
 }
