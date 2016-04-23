@@ -7,12 +7,13 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
-@Import({ CapboxConfiguration.class })
+@Import({CapboxConfiguration.class})
 public class CapboxApplication {
 
     public static void main(String[] args) {
         final ApplicationContext ctx = SpringApplication.run(
                 CapboxApplication.class, args);
     }
+
 
 }

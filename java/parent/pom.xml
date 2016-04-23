@@ -19,6 +19,7 @@
         <jackson.version>2.6.3</jackson.version>
         <capbox-commons.version>1.0-SNAPSHOT</capbox-commons.version>
         <httpcomponents.version>4.5.2</httpcomponents.version>
+        <servlet.version>3.1.0</servlet.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>

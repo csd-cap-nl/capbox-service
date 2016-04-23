@@ -13,6 +13,7 @@
 
     <artifactId>application</artifactId>
     <name>Capbox</name>
+    <url>https://github.com/csd-cap-nl/capbox</url>
 
     <dependencies>
         <dependency>
@@ -43,7 +44,56 @@
                 <filtering>false</filtering>
             </resource>
         </resources>
-
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>${packaging.mode}</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <index>true</index>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>nl.cap.csd.capbox.application.CapboxApplication</mainClass>
+                        </manifest>
+                        <manifestEntries>
+                            <mode>${build.mode}</mode>
+                            <url>${project.url}</url>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id> <!-- this is used for inheritance merges -->
+                        <phase>package</phase> <!-- bind to the packaging phase -->
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <build.mode>development</build.mode>
+                <packaging.mode>project</packaging.mode>
+            </properties>
+        </profile>
+        <profile>
+            <id>standalone</id>
+            <properties>
+                <build.mode>standalone</build.mode>
+                <packaging.mode>jar-with-dependencies</packaging.mode>
+            </properties>
+        </profile>
+    </profiles>
 </project>
