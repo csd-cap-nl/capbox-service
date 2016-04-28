@@ -42,7 +42,7 @@ public class CommonsConfiguration extends WebMvcConfigurationSupport {
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         objectMapper.registerModule(new Java8TimeModule());
         jsonConverter.setObjectMapper(objectMapper);
-        jsonConverter.setPrefixJson(true);
+        jsonConverter.setJsonPrefix(")]}',\n");
         return jsonConverter;
     }
 
