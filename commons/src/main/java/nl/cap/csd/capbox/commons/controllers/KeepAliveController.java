@@ -1,7 +1,7 @@
 package nl.cap.csd.capbox.commons.controllers;
 
-import nl.cap.csd.capbox.commons.services.version.VersionService;
 import nl.cap.csd.capbox.commons.services.version.VersionInformation;
+import nl.cap.csd.capbox.commons.services.version.VersionService;
 import nl.cap.csd.capbox.commons.services.version.VersionedBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
