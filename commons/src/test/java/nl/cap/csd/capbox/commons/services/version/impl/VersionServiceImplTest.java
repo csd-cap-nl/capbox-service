@@ -1,7 +1,6 @@
 package nl.cap.csd.capbox.commons.services.version.impl;
 
 import nl.cap.csd.capbox.commons.services.version.VersionInformation;
-import nl.cap.csd.capbox.commons.services.version.VersionService;
 import nl.cap.csd.capbox.commons.services.version.VersionedBean;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +35,7 @@ public class VersionServiceImplTest {
     @Mock
     private ApplicationContext contextMock;
 
-    private VersionService fixture = new VersionServiceImpl();
+    private VersionServiceImpl fixture = new VersionServiceImpl();
 
     @Before
     public void setUp() {
@@ -47,7 +46,8 @@ public class VersionServiceImplTest {
         when(contextMock.getBean(Test1VersionedBean.class)).thenReturn(new Test1VersionedBean());
         when(contextMock.getBean(Integer.class)).thenReturn(Integer.parseInt("10"));
         when(contextMock.getBean(String.class)).thenThrow(new NoSuchBeanDefinitionException("Test"));
-        ((VersionServiceImpl) fixture).setApplicationContext(contextMock);
+
+        fixture.setApplicationContext(contextMock);
     }
 
     @Test
