@@ -36,6 +36,7 @@
     <modules>
         <module>commons</module>
         <module>application</module>
+        <module>location-services</module>
     </modules>
 
     <dependencyManagement>
