@@ -10,16 +10,19 @@
     <packaging>pom</packaging>
 
     <properties>
+        <!-- Project settings -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
 
-        <spring-context.version>4.2.5.RELEASE</spring-context.version>
-        <junit.version>4.12</junit.version>
-        <mockito.version>1.10.19</mockito.version>
-        <spring-boot.version>1.3.3.RELEASE</spring-boot.version>
-        <jackson.version>2.6.3</jackson.version>
-        <httpcomponents.version>4.5.2</httpcomponents.version>
-        <servlet.version>3.1.0</servlet.version>
+        <!-- Project lbirary version -->
+        <project.versions.spring-context>4.2.5.RELEASE</project.versions.spring-context>
+        <project.versions.junit>4.12</project.versions.junit>
+        <project.versions.mockito>1.10.19</project.versions.mockito>
+        <project.versions.spring-boot>1.3.3.RELEASE</project.versions.spring-boot>
+        <project.versions.jackson>2.6.3</project.versions.jackson>
+        <project.versions.httpcomponents>4.5.2</project.versions.httpcomponents>
+        <project.versions.javax-servlet>3.1.0</project.versions.javax-servlet>
     </properties>
 
     <url>https://github.com/csd-cap-nl/capbox</url>
@@ -40,12 +43,54 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
-                <version>${spring-boot.version}</version>
+                <version>${project.versions.spring-boot}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
-                <version>${spring-context.version}</version>
+                <version>${project.versions.spring-context}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${project.versions.spring-context}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${project.versions.spring-context}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-autoconfigure</artifactId>
+                <version>${project.versions.spring-boot}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${project.versions.jackson}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${project.versions.httpcomponents}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${project.versions.javax-servlet}</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${project.versions.junit}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${project.versions.mockito}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
