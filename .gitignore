@@ -1,7 +1,11 @@
+# IntelliJ IDEA
 .idea/
-target/
 **/*.iml
+
+# Eclipse
 **/.classpath
 **/.project
 **/.settings
 
+# Maven
+target/
