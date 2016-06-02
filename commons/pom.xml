@@ -13,6 +13,7 @@
     <artifactId>commons</artifactId>
 
     <dependencies>
+        <!-- Spring libraries -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -29,6 +30,8 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
+
+        <!-- Other libraries -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
@@ -41,6 +44,8 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
+
+        <!-- Test libraries -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
