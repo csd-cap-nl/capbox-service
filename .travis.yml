@@ -1,12 +1,23 @@
+sudo: required
+
+services:
+- docker
+
 language: java
 
 jdk:
- - oraclejdk8
+- oraclejdk8
 
 branches:
   only:
-    - master
-    - development
+  - master
+  - development
 
-install: "mvn clean install -Dmaven.test.skip=true -Dmaven.source.skip=true -Dmaven.javadoc.skip=true"
-script: "mvn verify"
+script: mvn clean verify
+
+deploy:
+  provider: heroku
+  app:
+    development: capbox-playground
+  api_key:
+    secure: RQPg6VaViADazsOAI9CqG0JCJvdquwsWwBTmHJbKNTmdyAPdUsa+j+5QVHMb7DngzNX+OF0wkmcr0j+oqsjQ+avbUuleM6dHEr+s2f/QQWB3NXuuVxowVkLMmfFnD+t7dvIUzvcRfpgH/ZBMLeuYo3yUQohXdFuhr+gv/ODd/8HfKcxR6IOvCjfPB83pWY3j8SftveJTJS85b9cFL3q4yFTSHAEra3bbRY5aVlkASn6LRBv56UsGwz7IxM6JY2YthwbSODf46t5noY8mxXl/mTTigXl1NAvZXyjVwZVeT32e8EeuJqwrdnScJKzSIHSabec1Izk8/YHAO7SRf2k9JsMUbWJd6Jr13GWxjPetzuag4ND4b2YvfDoi+QOLK0ljTuSJLOVT2BiUSetPEqMc5cuHtxYe5PN7kSK2nQ6DhXorLMo/Yw/gwH6lOnXcKgEbvZ4AghaZXn6ZpuLWjzjElQcfCkOEfGuItBcrTXTv97CeU6McI8CuEwNYfLDpGlWMg/RYYsURwtaj7MliIfAerG1JZPUZtkzgtc6/BXYTgpo4cFa8g/6XaYqOar5zk7zBqzdUWqvxTUULYABjbgFc97DcX2BE0jrVuyvn3IYCXDkOEB26kZ0ECas8eeWcP2Fw7L6bBaUjFyneDQSyJLRto1N0ugXAP9cn9JU1lH0ZR98=
