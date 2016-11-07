@@ -1,0 +1,70 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="1" author="bart">
+        <createTable tableName="USERS">
+            <column name="pkId" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="username" type="varchar(32)">
+                <constraints unique="true" nullable="false" />
+            </column>
+            <column name="fullname" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="salt" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="bart">
+        <createTable tableName="ROLES">
+            <column name="pkId" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="rolename" type="varchar(32)">
+                <constraints unique="true" nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="bart">
+        <createTable tableName="USERROLEMAP">
+            <column name="pkId" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="fkUser" type="bigint">
+                <constraints nullable="false" />
+            </column>
+            <column name="fkRole" type="bigint">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <addUniqueConstraint tableName="USERROLEMAP" columnNames="fkUser,fkRole" />
+    </changeSet>
+
+    <changeSet id="4" author="bart">
+        <insert tableName="ROLES">
+            <column name="rolename">ADMIN</column>
+        </insert>
+        <insert tableName="USERS">
+            <column name="username">admin</column>
+            <column name="fullname">administrator</column>
+            <column name="password">hashed</column>
+            <column name="salt">random</column>
+        </insert>
+        <insert tableName="USERROLEMAP">
+            <column name="fkUser">1</column>
+            <column name="fkRole">2</column>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
