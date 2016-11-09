@@ -9,6 +9,7 @@ public class FunctionUtil {
 	}
 
 	public static <T> T runtimeException(ExceptionThrower<T> exceptionThrower){
+		System.out.println("n00b");
 		try {
 			return exceptionThrower.apply();
 		} catch (Exception e) {
