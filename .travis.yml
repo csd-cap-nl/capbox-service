@@ -10,7 +10,8 @@ branches:
   - master
   - development
 
-script: mvn clean verify
-
 notifications:
   slack: capbox:l2wu5yKg5EAORuhs5gUoH1u0
+  email: true
+
+script: mvn clean verify
