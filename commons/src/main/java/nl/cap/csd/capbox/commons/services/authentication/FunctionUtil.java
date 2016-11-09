@@ -1,10 +1,10 @@
-package nl.cap.csd.capbox.application.security;
+package nl.cap.csd.capbox.commons.services.authentication;
 
 
 public class FunctionUtil {
 
 	@FunctionalInterface
-	interface ExceptionThrower<T>{
+	public interface ExceptionThrower<T>{
 		T apply() throws Exception;
 	}
 

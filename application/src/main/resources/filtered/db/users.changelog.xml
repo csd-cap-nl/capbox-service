@@ -13,6 +13,9 @@
             <column name="username" type="varchar(32)">
                 <constraints unique="true" nullable="false" />
             </column>
+            <column name="email" type="varchar(255)">
+                <constraints unique="true" nullable="false" />
+            </column>
             <column name="fullname" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
@@ -61,6 +64,7 @@
             <column name="fullname">administrator</column>
             <column name="password">hashed</column>
             <column name="salt">random</column>
+            <column name="email">admin@localhost</column>
         </insert>
         <insert tableName="USERROLEMAP">
             <column name="fkUser">1</column>

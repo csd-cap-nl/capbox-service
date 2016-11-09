@@ -1,6 +1,6 @@
 package nl.cap.csd.capbox.commons.model.users;
 
-import java.util.List;
+import java.util.Base64;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,14 +22,17 @@ public class User {
     @Column(name = "username", unique = true, nullable = false)
     private String username;
 
+    @Column(name = "email", unique = true, nullable = false)
+    private String email;
+
     @Column(name = "fullname", nullable = false)
     private String fullname;
 
     @Column(name = "password", nullable = false)
-    private String password;
+    private String internalPassword;
 
     @Column(name = "salt", nullable = false)
-    private String salt;
+    private String internalSalt;
 
     @ManyToMany
     private Set<Role> roles;
@@ -46,12 +49,16 @@ public class User {
         return fullname;
     }
 
-    public final String getPassword() {
-        return password;
+    public final byte[] getPassword() {
+        return Base64.getDecoder().decode(internalPassword);
     }
 
-    public final String getSalt() {
-        return salt;
+    public final void setPassword(final byte[] password) {
+        this.internalPassword = Base64.getEncoder().encodeToString(password);
+    }
+
+    public final byte[] getSalt() {
+        return Base64.getDecoder().decode(internalSalt);
     }
 
     public final void setUsername(final String username) {
@@ -62,12 +69,8 @@ public class User {
         this.fullname = fullname;
     }
 
-    public final void setPassword(final String password) {
-        this.password = password;
-    }
-
-    public final void setSalt(final String salt) {
-        this.salt = salt;
+    public final void setSalt(final byte[] salt) {
+        this.internalSalt = Base64.getEncoder().encodeToString(salt);
     }
 
     public final Set<Role> getRoles() {
@@ -78,4 +81,12 @@ public class User {
         this.roles = roles;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public User setEmail(final String email) {
+        this.email = email;
+        return this;
+    }
 }

@@ -1,4 +1,4 @@
-package nl.cap.csd.capbox.application.security;
+package nl.cap.csd.capbox.commons.services.authentication;
 
 public interface AuthenticationProvider {
 

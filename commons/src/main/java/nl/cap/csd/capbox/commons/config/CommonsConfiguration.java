@@ -3,6 +3,8 @@ package nl.cap.csd.capbox.commons.config;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import nl.cap.csd.capbox.commons.controllers.KeepAliveController;
+import nl.cap.csd.capbox.commons.helpers.RandomProvider;
+import nl.cap.csd.capbox.commons.helpers.impl.SecureRandomProvider;
 import nl.cap.csd.capbox.commons.services.version.VersionService;
 import nl.cap.csd.capbox.commons.services.version.impl.VersionServiceImpl;
 import nl.cap.csd.capbox.commons.transformers.Java8TimeModule;
@@ -40,13 +42,20 @@ public class CommonsConfiguration extends WebMvcConfigurationSupport {
     }
 
     @Bean
+    public RandomProvider randomProvider() {
+        return new SecureRandomProvider();
+    }
+
+    @Bean
     public MappingJackson2HttpMessageConverter customJackson2HttpMessageConverter() {
-        MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
-        ObjectMapper objectMapper = new ObjectMapper();
+        final ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         objectMapper.registerModule(new Java8TimeModule());
+
+        final MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
         jsonConverter.setObjectMapper(objectMapper);
-        jsonConverter.setJsonPrefix(")]}',\n");
+        jsonConverter.setJsonPrefix(")]}',\n"); // XSSI protection. This stops the malformed JSON with instructions to be injected in to Javascript code.
+
         return jsonConverter;
     }
 

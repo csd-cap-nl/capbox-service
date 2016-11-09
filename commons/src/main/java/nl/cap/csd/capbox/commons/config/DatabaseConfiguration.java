@@ -37,16 +37,13 @@ public class DatabaseConfiguration {
     }
 
     @Bean
-    public EntityPackageName userPackage() {
-        return new EntityPackageName(User.class);
-    }
-
-    @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
         final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         final DataSource dataSource = jdbcTemplate.getDataSource();
         em.setDataSource(dataSource);
-        em.setPackagesToScan(getPackagesToScan());
+        em.setPackagesToScan(
+                User.class.getPackage().getName()
+        );
 
         final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
@@ -54,15 +51,6 @@ public class DatabaseConfiguration {
         em.setJpaProperties(properties);
 
         return em;
-    }
-
-    private String[] getPackagesToScan() {
-        return context.getBeansOfType(EntityPackageName.class)
-                .values()
-                .stream()
-                .map(EntityPackageName::getName)
-                .distinct()
-                .toArray(String[]::new);
     }
 
 }
