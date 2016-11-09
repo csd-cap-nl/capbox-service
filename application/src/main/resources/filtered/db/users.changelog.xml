@@ -54,6 +54,7 @@
     <changeSet id="4" author="bart">
         <insert tableName="ROLES">
             <column name="rolename">ADMIN</column>
+            <column name="rolename">USER</column>
         </insert>
         <insert tableName="USERS">
             <column name="username">admin</column>

@@ -3,6 +3,7 @@ package nl.cap.csd.capbox.commons.config;
 import java.util.Properties;
 import javax.sql.DataSource;
 import liquibase.integration.spring.SpringLiquibase;
+import nl.cap.csd.capbox.commons.model.users.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.ApplicationContext;
@@ -33,6 +34,11 @@ public class DatabaseConfiguration {
         springLiquibase.setDataSource(jdbcTemplate.getDataSource());
         springLiquibase.setChangeLog(environment.getProperty("liquibase.changelog"));
         return springLiquibase;
+    }
+
+    @Bean
+    public EntityPackageName userPackage() {
+        return new EntityPackageName(User.class);
     }
 
     @Bean

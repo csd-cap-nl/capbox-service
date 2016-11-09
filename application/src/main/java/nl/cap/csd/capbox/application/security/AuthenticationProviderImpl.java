@@ -1,4 +1,4 @@
-package authenticationprovider;
+package nl.cap.csd.capbox.application.security;
 
 
 import javax.crypto.SecretKeyFactory;
@@ -6,7 +6,7 @@ import javax.crypto.spec.PBEKeySpec;
 import java.security.SecureRandom;
 import java.util.Arrays;
 
-import static authenticationprovider.FunctionUtil.runtimeException;
+import static nl.cap.csd.capbox.application.security.FunctionUtil.runtimeException;
 
 class AuthenticationProviderImpl implements AuthenticationProvider {
 

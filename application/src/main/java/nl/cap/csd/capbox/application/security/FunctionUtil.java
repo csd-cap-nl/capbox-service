@@ -1,4 +1,4 @@
-package authenticationprovider;
+package nl.cap.csd.capbox.application.security;
 
 
 public class FunctionUtil {
