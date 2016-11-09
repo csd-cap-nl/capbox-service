@@ -1,8 +1,5 @@
 sudo: required
 
-services:
-- docker
-
 language: java
 
 jdk:
@@ -16,4 +13,4 @@ branches:
 script: mvn clean verify
 
 notifications:
-  slack: capbox:P0Wiy75KRAu5XrwM61qqXG3y
+  slack: capbox:l2wu5yKg5EAORuhs5gUoH1u0
