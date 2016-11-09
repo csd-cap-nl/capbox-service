@@ -13,7 +13,6 @@ branches:
   - master
   - development
 
-install: mvn validate
 script: mvn clean verify
 
 notifications:
