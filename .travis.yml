@@ -11,7 +11,7 @@ branches:
   - development
 
 notifications:
-  slack: capbox:l2wu5yKg5EAORuhs5gUoH1u0
+  slack: 'capbox:l2wu5yKg5EAORuhs5gUoH1u0#notifications'
   email: true
 
 script: mvn clean verify
