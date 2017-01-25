@@ -39,6 +39,7 @@
         <module>commons</module>
         <module>application</module>
         <module>location-services</module>
+        <module>user-services</module>
     </modules>
 
     <dependencyManagement>
