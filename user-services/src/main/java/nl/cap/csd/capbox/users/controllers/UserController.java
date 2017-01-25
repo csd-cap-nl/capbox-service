@@ -1,12 +1,26 @@
 package nl.cap.csd.capbox.users.controllers;
 
+import java.util.List;
 import nl.cap.csd.capbox.commons.services.version.VersionInformation;
 import nl.cap.csd.capbox.commons.services.version.VersionedBean;
+import nl.cap.csd.capbox.users.model.web.User;
+import nl.cap.csd.capbox.users.service.DataProvider;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class UserController implements VersionedBean {
+
+    @Autowired
+    private DataProvider dataProvider;
 
     @Value("${application.version}")
     private String applicationVersion;
@@ -19,4 +33,32 @@ public class UserController implements VersionedBean {
         return new VersionInformation(applicationName, applicationVersion);
     }
 
+    @GetMapping("/api/user")
+    public List<User> getUser() {
+        return dataProvider.getUserList();
+    }
+
+    @GetMapping("/api/user/{id}")
+    public ResponseEntity<?> getUser(@PathVariable("id") final String userId) {
+        final User result = dataProvider.getUser(userId);
+        if (result == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(result);
+    }
+
+    @PutMapping("/api/user/{id}")
+    public ResponseEntity<String> updateUser(@PathVariable("id") final String userId, @RequestBody final User userData) {
+        if (userData.getId() != Long.parseLong(userId)) {
+            return ResponseEntity.badRequest().body("Data mismatch");
+        }
+        dataProvider.updateUser(userData);
+        return ResponseEntity.ok("Ok");
+    }
+
+    @PostMapping("/api/user")
+    public ResponseEntity<String> createUser() {
+        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body("Not implemented");
+//        return dataProvider.getUser(userId);
+    }
 }
