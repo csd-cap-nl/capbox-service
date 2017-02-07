@@ -10,7 +10,10 @@ public class StubbedDataProvider implements DataProvider {
     private List<User> users = new ArrayList<>();
 
     public StubbedDataProvider() {
-        users.add( new User(123L, "Test", "test2", ""));
+        users.add( new User(123L, "Test123", "test123", ""));
+        users.add( new User(1L, "Test1", "test1", ""));
+        users.add( new User(2L, "Test2", "test2", ""));
+        users.add( new User(3L, "Test3", "test3", ""));
     }
 
     @Override
@@ -20,11 +23,17 @@ public class StubbedDataProvider implements DataProvider {
 
     @Override
     public User getUser(final String userId) {
-        if ("123".equals(userId)) {
-            return users.get(0);
-        } else {
-            return null;
-        }
+    	for (User user: users) {
+    		if (user.getUserName().equals(userId)) {
+    			return user;
+    		}
+    	}
+    	return null;
+//        if ("123".equals(userId)) {
+//            return users.get(0);
+//        } else {
+//            return null;
+//        }
     }
 
     @Override
