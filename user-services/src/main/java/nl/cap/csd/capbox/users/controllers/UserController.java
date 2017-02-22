@@ -1,14 +1,16 @@
 package nl.cap.csd.capbox.users.controllers;
 
+import java.util.Collection;
 import java.util.List;
 import nl.cap.csd.capbox.commons.services.version.VersionInformation;
 import nl.cap.csd.capbox.commons.services.version.VersionedBean;
 import nl.cap.csd.capbox.users.model.web.User;
 import nl.cap.csd.capbox.users.service.DataProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,26 +18,22 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+// TODO Security
 @RestController
 public class UserController implements VersionedBean {
 
     @Autowired
     private DataProvider dataProvider;
 
-    @Value("${application.version}")
-    private String applicationVersion;
-
-    @Value("${application.name}")
-    private String applicationName;
-
-    @Override
-    public VersionInformation version() {
-        return new VersionInformation(applicationName, applicationVersion);
+    @GetMapping("/api/user")
+    public Collection<User> getUsers() {
+        return dataProvider.getUserList();
     }
 
-    @GetMapping("/api/user")
-    public List<User> getUser() {
-        return dataProvider.getUserList();
+    @PostMapping("/api/user")
+    public ResponseEntity<String> createUser(@RequestBody final User userData) {
+        final long userId = dataProvider.createUser(userData);
+        return ResponseEntity.ok("Ok");
     }
 
     @GetMapping("/api/user/{id}")
@@ -56,9 +54,15 @@ public class UserController implements VersionedBean {
         return ResponseEntity.ok("Ok");
     }
 
-    @PostMapping("/api/user")
-    public ResponseEntity<String> createUser() {
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body("Not implemented");
-//        return dataProvider.getUser(userId);
+    @DeleteMapping("/api/user/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable("id") final String userId) {
+        dataProvider.deleteUser(userId);
+        return ResponseEntity.ok("Ok");
     }
+
+    @Override
+    public VersionInformation version() {
+        return new VersionInformation("User services", "1.0");
+    }
+
 }

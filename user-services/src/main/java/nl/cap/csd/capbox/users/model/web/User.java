@@ -2,7 +2,7 @@ package nl.cap.csd.capbox.users.model.web;
 
 public class User {
 
-    private long id;
+    private Long id;
     private String userName;
     private String fullName;
     private String email;
@@ -10,18 +10,18 @@ public class User {
     public User() {
     }
 
-    public User(final long id, final String userName, final String fullName, final String email) {
-        this.id = id;
+    public User(final String userName, final String fullName, final String email) {
+        this.id = null;
         this.userName = userName;
         this.fullName = fullName;
         this.email = email;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public User setId(final long id) {
+    public User setId(final Long id) {
         this.id = id;
         return this;
     }
