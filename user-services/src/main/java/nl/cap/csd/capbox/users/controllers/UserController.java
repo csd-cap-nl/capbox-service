@@ -40,9 +40,14 @@ public class UserController implements VersionedBean {
         return dataProvider.getUserList();
     }
 
+    //http://localhost:8080/api/user/Test123
+    //http://localhost:8080/api/user/123
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/api/user/{id}")
-    public ResponseEntity<?> getUser(@PathVariable("id") final String userId) {
-        final User result = dataProvider.getUser(userId);
+    public ResponseEntity<?> getUser(@PathVariable("id") final String id) {
+//   public ResponseEntity<?> getUser(@PathVariable("id") final String userId) {
+     //   final User result = dataProvider.getUser(userId);
+        final User result = dataProvider.getUser(id);
         if (result == null) {
             return ResponseEntity.notFound().build();
         }
@@ -50,8 +55,8 @@ public class UserController implements VersionedBean {
     }
 
     @PutMapping("/api/user/{id}")
-    public ResponseEntity<String> updateUser(@PathVariable("id") final String userId, @RequestBody final User userData) {
-        if (userData.getId() != Long.parseLong(userId)) {
+    public ResponseEntity<String> updateUser(@PathVariable("id") final String id, @RequestBody final User userData) {
+        if (userData.getId() != Long.parseLong(id)) {
             return ResponseEntity.badRequest().body("Data mismatch");
         }
         dataProvider.updateUser(userData);
