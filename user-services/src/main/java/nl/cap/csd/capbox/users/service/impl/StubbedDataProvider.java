@@ -22,9 +22,15 @@ public class StubbedDataProvider implements DataProvider {
     }
 
     @Override
-    public User getUser(final String userId) {
+    public User getUser(final String id) {
+//        public User getUser(final String userId) {
+//    	for (User user: users) {
+//    		if (user.getUserName().equals(userId)) {
+//    			return user;
+//    		}
+//    	}
     	for (User user: users) {
-    		if (user.getUserName().equals(userId)) {
+    		if (user.getId() == Long.parseLong(id)) {
     			return user;
     		}
     	}

@@ -7,7 +7,8 @@ public interface DataProvider {
 
     List<User> getUserList();
 
-    User getUser(String userId);
+    User getUser(String id);
+//    User getUser(String userId);
 
     void updateUser(User userData);
 }
