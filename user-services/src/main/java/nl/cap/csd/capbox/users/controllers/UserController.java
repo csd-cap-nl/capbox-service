@@ -40,7 +40,6 @@ public class UserController implements VersionedBean {
         return dataProvider.getUserList();
     }
 
-    //http://localhost:8080/api/user/Test123
     //http://localhost:8080/api/user/123
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/api/user/{id}")
