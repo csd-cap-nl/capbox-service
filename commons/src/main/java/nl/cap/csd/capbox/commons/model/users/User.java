@@ -34,7 +34,7 @@ public class User {
     @Column(name = "salt", nullable = false)
     private String internalSalt;
 
-    @ManyToMany
+    @ManyToMany(targetEntity = Role.class)
     private Set<Role> roles;
 
     public final long getId() {
@@ -89,4 +89,5 @@ public class User {
         this.email = email;
         return this;
     }
+
 }
