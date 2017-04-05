@@ -30,6 +30,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
+        <dependency>
+            <!-- This dependency auto configures a number of development tools for spring boot. Will be moved to a profile to be enabled
+            on dev only -->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <version>1.3.5.RELEASE</version>
+        </dependency>
 
         <!-- Database libraries -->
         <dependency>

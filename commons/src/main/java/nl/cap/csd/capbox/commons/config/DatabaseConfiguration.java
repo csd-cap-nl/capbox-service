@@ -1,9 +1,11 @@
 package nl.cap.csd.capbox.commons.config;
 
+import java.sql.SQLException;
 import java.util.Properties;
 import javax.sql.DataSource;
 import liquibase.integration.spring.SpringLiquibase;
 import nl.cap.csd.capbox.commons.model.users.User;
+import org.h2.tools.Server;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.ApplicationContext;
@@ -34,6 +36,13 @@ public class DatabaseConfiguration {
         springLiquibase.setDataSource(jdbcTemplate.getDataSource());
         springLiquibase.setChangeLog(environment.getProperty("liquibase.changelog"));
         return springLiquibase;
+    }
+
+    // This bean starts a second webserver in the application listening to port 8082.
+    // This webserver allows direct connection to the h2 database console on the root path: localhost:8082/
+    @Bean
+    public Server h2WebServer() throws SQLException {
+        return Server.createWebServer("-web","-webAllowOthers","-webPort","8082").start();
     }
 
     @Bean
