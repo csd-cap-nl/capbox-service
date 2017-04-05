@@ -22,7 +22,7 @@ public class StubbedDataProvider implements DataProvider {
     @Override
     public User getUser(final String userId) {
         try {
-            return users.get(Long.parseLong(userId));
+            return users.get(userId);
         } catch (NumberFormatException e) {
             return null;
         }
@@ -65,7 +65,7 @@ public class StubbedDataProvider implements DataProvider {
 
     @Override
     public void deleteUser(final String userId) {
-        users.remove(Long.parseLong(userId));
+        users.remove(userId);
     }
 
 }
