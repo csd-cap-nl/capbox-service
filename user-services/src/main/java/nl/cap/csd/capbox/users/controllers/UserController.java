@@ -32,6 +32,7 @@ public class UserController implements VersionedBean {
         return dataProvider.getUserList();
     }
 
+    //http://localhost:8080/api/user
     @PostMapping("/api/user")
     public ResponseEntity<String> createUser(@RequestBody final User userData) {
         final long userId = dataProvider.createUser(userData);
